@@ -18,7 +18,6 @@ jobs:
           node-version: "22.x"
 
       - name: Install dependencies
-        if: steps.cache-node-modules.outputs.cache-hit != 'true'
         run: npm ci
 
       - name: Cache node_modules
@@ -39,7 +38,7 @@ jobs:
   #       with:
   #         node-version: "22.x"
   #     - name: Restore node_modules cache
-  #       uses: actions/cache@v3
+  #       uses: actions/cache@v3A
   #       with:
   #         path: node_modules
   #         key: ${{ runner.os }}-node_modules-${{ hashFiles('**/package-lock.json') }}
@@ -75,8 +74,6 @@ jobs:
         with:
           path: node_modules
           key: ${{ runner.os }}-node_modules-${{ hashFiles('**/package-lock.json') }}
-      - name: install Angular CLI
-        run: npm install -g @angular/cli
       - name: Run Build
         run: npm run build
 
@@ -93,8 +90,6 @@ jobs:
         with:
           path: node_modules
           key: ${{ runner.os }}-node_modules-${{ hashFiles('**/package-lock.json') }}
-      - name: install Angular CLI
-        run: npm install -g @angular/cli
       - name: Run Tests with coverage
         run: npm test
       # - name: Upload Test Coverage
